@@ -120,6 +120,14 @@
             }
           });
 
+          // If there's a search term in the URL, put it in the text box.
+          var term = dom.byId("term");
+          var hash = window.location.hash;
+          if ( hash.indexOf("search/") > -1 ) {
+            console.log("hash has 'search/'", hash);
+            term.value = hash.split("search/")[1];
+          }
+
           // Use dojo/router to manager page hash and link to 
           // pages that show a filtered selection of sessions.
           router.register("search/:value", sessionFilter);
@@ -127,7 +135,7 @@
           router.startup();
 
           // Give filter box focus
-          dom.byId("term").focus();
+          term.focus();
         }
 
         function sessionFilter(e) {
