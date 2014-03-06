@@ -39,7 +39,7 @@
     <script src="//ajax.googleapis.com/ajax/libs/dojo/1.9.1/dojo/dojo.js" 
             data-dojo-config="async: 1"></script>
     <script>
-      var shush, all = [];
+      var all = [];
 
       require([
         "dojo/request", "dojo/router",
@@ -52,13 +52,11 @@
         on, query,
         date, locale
       ) {
-        request("sessions.js").then(
+        request("sessions.json").then(
           function(response) {
-            // Data isn't true JSON, use eval to go from string to object.
-            shush = eval("(" + response + ")");
-            // console.log("shush", shush);
+            // console.log("response", JSON.parse(response));
             // Build the DOM.
-            show(shush);
+            show(JSON.parse(response));
           },
           function(error) {
             console.log("error", error);
